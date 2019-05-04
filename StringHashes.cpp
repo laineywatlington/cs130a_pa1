@@ -14,3 +14,7 @@ uint64_t JenkinsHash::hash(const std::string& input) const{
   hash += (hash << 15);
   return hash;
 }
+
+uint64_t PearsonHash::hash(const std::string& input) const{
+  
+}
