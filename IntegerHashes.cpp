@@ -33,6 +33,6 @@ SquareRootHash::SquareRootHash(uint64_t i, uint64_t m) : IntegerHash(i, m){
   b = sqrt(4 * i + 3);
 }
 
-uint64_t SquareRootHash::hash(uint64_t input){
+uint64_t SquareRootHash::hash(uint64_t input) const{
  return static_cast<uint64_t>(m * ((input * b) - static_cast<uint64_t>(input * b))); 
 }
