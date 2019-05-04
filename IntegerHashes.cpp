@@ -29,3 +29,12 @@ uint64_t ReciprocalHash::hash(uint64_t input) const{
   
 }
 
+// This function also uses the "multiplication method" of hashing
+// It multiplies the input by the square root of 4i + 3, then multiplies the fractional part by m
+SquareRootHash::SquareRootHash(uint64_t i, uint64_t m) : IntegerHash(i, m){
+  b = sqrt(4 * i + 3);
+}
+
+uint64_t SquareRootHash::hash(uint64_t input){
+  
+}
