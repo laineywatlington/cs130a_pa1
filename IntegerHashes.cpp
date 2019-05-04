@@ -7,9 +7,6 @@ IntegerHash::IntegerHash(uint64_t i, uint64_t m){ //initilizing stuff
   this -> m = m;
 }
 
-uint64_t IntegerHash::hash(uint64_t input){
-  return input;
-}
 DivisionHash::DivisionHash(uint64_t i, uint64_t m) : IntegerHash(i, m){ //initializing stuff... can i do this using integerhash?
 }
 
