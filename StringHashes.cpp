@@ -1,5 +1,6 @@
 #include "StringHashes.h"
 
+// This implements Bob Jenkins' "one at a time" hash function
 uint64_t JenkinsHash::hash(const std::string& input) const{
   uint32_t hash = 0;
   size_t length = input.length();
@@ -15,6 +16,12 @@ uint64_t JenkinsHash::hash(const std::string& input) const{
   return hash;
 }
 
+// This implements Peter Pearson's eight-bit hash
+// It uses a very simple lookup table: T[i] = 255 - i
 uint64_t PearsonHash::hash(const std::string& input) const{
-  
+  uint8_t hash = 0;
+	for (const uint8_t &bit : input) {
+		hash = 255 - (hash ^ bit);
+	}
+	return hash;
 }
