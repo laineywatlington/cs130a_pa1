@@ -2,7 +2,7 @@
 #include <cmath>
 using namespace std;
 
-IntegerHash::IntegerHash(uint64_t i, unint64_t m){ //initilizing stuff
+IntegerHash::IntegerHash(uint64_t i, uint64_t m){ //initilizing stuff
   this -> i = i;
   this -> m = m;
 }
