@@ -9,7 +9,7 @@ IntegerHash::IntegerHash(uint64_t i, unint64_t m){ //initilizing stuff
 
 DivisionHash::DivisionHash(uint64_t i, uint64_t m){ //initializing stuff... can i do this using integerhash?
   this -> i = i;
-  this -> j = j;
+  this -> m = m;
 }
 
 // This function uses the "division method" of hashing
