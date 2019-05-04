@@ -26,7 +26,7 @@ ReciprocalHash::ReciprocalHash(uint64_t i, uint64_t m) : IntegerHash(i, m){ //le
 }
 
 uint64_t ReciprocalHash::hash(uint64_t input) const{
-  
+  return static_cast<uint64_t>(m * ((input * b) - static_cast<uint64_t>(input * b)));
 }
 
 // This function also uses the "multiplication method" of hashing
@@ -36,5 +36,5 @@ SquareRootHash::SquareRootHash(uint64_t i, uint64_t m) : IntegerHash(i, m){
 }
 
 uint64_t SquareRootHash::hash(uint64_t input){
-  
+ return static_cast<uint64_t>(m * ((input * b) - static_cast<uint64_t>(input * b))); 
 }
