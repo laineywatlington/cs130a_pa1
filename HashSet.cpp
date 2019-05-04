@@ -47,7 +47,3 @@ void HashSet::rehash(){
   }
   delete [] temp;
 }
-      
-    }
-  }
-}
