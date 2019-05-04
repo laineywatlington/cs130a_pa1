@@ -28,3 +28,26 @@ HashSet::~HashSet(){
   delete intfn;
   delete strfn;
 }
+
+void HashSet::rehash(){
+  int newslots = nslots * 2;
+  string** temp = slots;
+  slots = new string * [newslots];
+  nitems = 0;
+  for(int i = 0; i < newslots; ++i){
+    slots[i] = nullptr;
+  }
+  delete intfn;
+  intfn = new SquareRootHash(5, newslots);
+  for(int i = 0; i < newslots / 2; ++i){
+    if(temp[i]){
+      insert(*temp[i]);
+      delete temp[i];
+    }
+  }
+  delete [] temp;
+}
+      
+    }
+  }
+}
