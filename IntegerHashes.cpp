@@ -26,7 +26,6 @@ ReciprocalHash::ReciprocalHash(uint64_t i, uint64_t m) : IntegerHash(i, m){ //le
 }
 
 uint64_t ReciprocalHash::hash(uint64_t input) const{
-  double newinput1 = input * b;
-  uint64_t newinput2 = static_cast<uint64_t>(input * b);
-  static_cast<uint64_t>
+  
 }
+
