@@ -11,7 +11,7 @@ HashSet::HashSet(){
   slots = new string * [nslots];
   //set every slot to null
   for(i = 0; i < nslots; ++i){
-    slots[i] = nullptr;
+    slots[i] = NULL;
   }
 }
 
