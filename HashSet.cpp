@@ -5,7 +5,7 @@ using namespace std
 HashSet::HashSet(){
   //initialization
   nitems = 0;
-  nslots = 100000;
+  nslots = 100;
   intfn = new SquareRootHash(5, nslots);
   strfn = new JenkinsHash;
   slots = new string * [nslots];
@@ -18,10 +18,7 @@ HashSet::HashSet(){
 HashSet::~HashSet(){
   //delete every value in slots
   for(i = 0; i < nslots; ++i){
-    //if something exists here, delete it
-    if(slots[i]){
-      delete slots[i];
-    }
+    delete slots[i];
   }
   //clean up
   delete [] slots;
@@ -30,20 +27,11 @@ HashSet::~HashSet(){
 }
 
 void HashSet::rehash(){
-  int newslots = nslots * 2;
-  string** temp = slots;
-  slots = new string * [newslots];
-  nitems = 0;
-  for(int i = 0; i < newslots; ++i){
-    slots[i] = nullptr;
-  }
-  delete intfn;
-  intfn = new SquareRootHash(5, newslots);
-  for(int i = 0; i < newslots / 2; ++i){
-    if(temp[i]){
-      insert(*temp[i]);
-      delete temp[i];
-    }
-  }
-  delete [] temp;
+  int oldSlots = nslots;
+  nslots *= 2;  //set a new capacity for table
+  string ** temp = slots; //temporary table to hold info
+  //now, create a new table from slots !
+  slots = new string * [nslots];
+  //figure out later 
+  
 }
