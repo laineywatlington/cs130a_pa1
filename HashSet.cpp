@@ -17,47 +17,33 @@ HashSet::HashSet(){
   }
 }
 
-bool HashSet::lookup(const std::string& value) const{
-  int i = 0;
-  uint64_t location = strfn -> hash(value);
-  uint64_t newValue = intfn -> hash(location);
-  while(true){
-    //if not in
-    if(!(slots[newValue + i])){
-      return false;
+bool HashSet::lookup(const string& value) const{
+    uint64_t location = strfn -> hash(value);
+    uint64_t newValue = intfn -> hash(location);
+    for (int i = 0; i < nslots; i++) {
+        if (slots[(newValue + i) % nslots] == NULL) {
+            return false;
+        }
+        else if (*slots[(newValue + i) % nslots] == value) {
+            return true;
+        }
     }
-    //if in
-    if(*(slots[newValue + i]) == value){
-      return true;
-    }
-    else{
-      //check next value
-      i++;
-    }
-  }
-  return false;
+    return false;
 }
 
 void HashSet::insert(const std::string& value){
-  //first, check some stuff
-  if(lookup(value) == true){
-    return;
-  }
-  if(nitems >= nslots){
-    rehash();
-  }
-  uint64_t location = strfn -> hash(value);
-  uint64_t newValue = intfn -> hash(location);
-  int i = 0;
-  while(true){
-    if(slots[newValue + i]){
-      i++;
-      continue;
+    uint64_t location = strfn->hash(value);
+    uint64_t newValue = intfn->hash(location);
+    for (int i = 0; ; i++) {
+        if (slots[(newValue + i) % nslots] == NULL) {
+            slots[(newValue + i) % nslots] = new string(value);
+            nitems++;
+            break;
+        }
     }
-    slots[newValue + i] = new std::string(value);
-    nitems++;
-    return;
-  }
+    if (2 * nitems >= nslots) {
+        rehash();
+    }
 }
 
 void HashSet::rehash(){
