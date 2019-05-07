@@ -36,7 +36,7 @@ BloomFilter::~BloomFilter(){
   delete [] bits;
 }
 
-void BloomFilter::insert(const string& value){
+void BloomFilter::insert(const std::string& value){
   uint64_t location = strfn -> hash(value);
   for (int i = 0; i < k; i++){
     uint64_t newValue = intfns[i] -> hash(location);
@@ -44,7 +44,7 @@ void BloomFilter::insert(const string& value){
   }
 }
 
-bool BloomFilter::lookup(const string& value) const{
+bool BloomFilter::lookup(const std::string& value) const{
   uint64_t location = strfn -> hash(value);
   for(int i = 0; i < k; i++){
     uint64_t newValue = intfns[i] -> hash(location);
