@@ -1,6 +1,6 @@
 #include "HashSet.h"
 
-using namespace std
+using namespace std;
 
 HashSet::HashSet(){
   //initialization
@@ -10,14 +10,14 @@ HashSet::HashSet(){
   strfn = new JenkinsHash;
   slots = new string * [nslots];
   //set every slot to null
-  for(i = 0; i < nslots; ++i){
+  for(int i = 0; i < nslots; ++i){
     slots[i] = NULL;
   }
 }
 
 HashSet::~HashSet(){
   //delete every value in slots
-  for(i = 0; i < nslots; ++i){
+  for(int i = 0; i < nslots; ++i){
     delete slots[i];
   }
   //clean up
