@@ -57,28 +57,24 @@ bool BloomFilter::lookup(const std::string& value) const{
 */
 
 void BloomFilter::insert(const std::string& value){
-	uint64_t newValue = strfn ->  hash(value);
 	for(int i = 0; i < k; i++){
-		uint64_t location = intfns[i] -> hash(newValue);
-		uint64_t index = (location / 64);
-		int number = location % 64;
-		uint64_t k = (uint64_t(1) << number);
-		bits[index] |= k;
-    }
+		uint64_t newValue = strfn -> hash(value);
+		uint64_t location = intfns[i] -> hash(newValue); 
+		bits[location / 64] |= (uint64_t(1) << (location % 64)); 
+	}
 }
-
 bool BloomFilter::lookup(const std::string& value) const{
  	for(int i = 0; i < k; i++){
-		uint64_t v= (*strfn).hash(value); 
-		uint64_t id = (*intfns[i]).hash(v);
-		uint64_t temp = bits[id/64] & (uint64_t(1) << (id % 64)); 
+		uint64_t newValue = strfn -> hash(value); 
+		uint64_t location = intfns[i] -> hash(newValue);
+		uint64_t temp = bits[location / 64] & (uint64_t(1) << (location % 64)); 
+		if(temp[i] == 0){  
 		if(!(temp)){  
 			return false;
 		} 
 	}
 	return true; 
 }
-
 //destructor
 BloomFilter::~BloomFilter(){
 	delete [] bits;
