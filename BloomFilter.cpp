@@ -45,10 +45,13 @@ void BloomFilter::insert(const std::string& value){
 }
 
 bool BloomFilter::lookup(const std::string& value) const{
-	for (int i = 0; i < k; i++) {
-		uint64_t location = strfn -> hash(value);
-		uint64_t newValue = intfns[i] -> hash(location);
-		if (!(bits[newValue/64] & (static_cast<uint64_t>(1) << (newValue % 64)))) {
+	uint64_t newValue = strfn -> hash(value);
+	for(int i = 0; i < k; i++){
+		uint64_t location = intfns[i]-> hash(newValue);
+		int place = (location / 64);
+		int number = location % 64;
+		uint64_t temp = bits[place] >> number;
+		if((temp & uint64_t(1)) == 0){
 			return false;
 		}
 	}
