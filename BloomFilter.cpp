@@ -27,7 +27,7 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 			intfns[i] = reciprocalhash; 
 		} 
 	}
-	else if(infn == "squareroot"){	
+	else if(intfn == "squareroot"){	
 		for(int i = 0; i < k; i ++){
 			SquareRootHash* squareroothash = new SquareRootHash(i, m); 
 			intfns[i] = squareroothash; 
