@@ -73,7 +73,7 @@ bool BloomFilter::lookup(const std::string& value) const{
         uint64_t intHash = intfns[i]-> hash(stringHashValue);
         int index = (intHash / 64);
         int digit = intHash % 64;
-        uint64_t temp = bits[index] >> digit;
+        int temp = bits[index] >> digit;
    
         if((temp & uint64_t(1)) == 0){
             return false;
