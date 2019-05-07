@@ -26,15 +26,6 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
   }
 }
 
-//destructor
-BloomFilter::~BloomFilter(){
-  for(int i = 0; i < k; i++){
-    delete intfns[i];
-  }
-  delete [] intfns;
-  delete strfn;
-  delete [] bits;
-}
 
 void BloomFilter::insert(const std::string& value){
 	for(int i = 0; i < k; i++){
@@ -54,4 +45,15 @@ bool BloomFilter::lookup(const std::string& value) const{
 		} 
 	}
 	return true; 
+}
+
+
+//destructor
+BloomFilter::~BloomFilter(){
+  for(int i = 0; i < k; i++){
+    delete intfns[i];
+  }
+  delete [] intfns;
+  delete strfn;
+  delete [] bits;
 }
