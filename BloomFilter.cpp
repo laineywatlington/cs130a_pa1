@@ -6,31 +6,28 @@ using namespace std;
 
 BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	this->k = k; 
-	this->m = m;
-	intfns = new IntegerHash*[k]; 
+	this->m = m; 
         this -> bits = new uint64_t[m](); 
+	intfns = new IntegerHash*[k];
 	if(strfn == "jenkins"){
 		this -> strfn = new JenkinsHash();
 	}
 	else if(strfn == "pearson"){
 		this -> strfn = new PearsonHash(); 
 	}
-	if(intfn == "division"){
-		for(int i = 0; i < k; i ++){
-			DivisionHash* divisionhash = new DivisionHash(i, m);  
-			intfns[i] = divisionhash; 
+	if (intfn == "division") {
+		for (int i = 0; i < k; ++i) {
+			intfns[i] = new DivisionHash(i, m);
 		}
 	}
-	else if(intfn == "reciprocal"){
-		for(int i = 0; i < k; i ++){
-			ReciprocalHash* reciprocalhash = new ReciprocalHash(i, m); 
-			intfns[i] = reciprocalhash; 
-		} 
+	else if (intfn == "reciprocal") {
+		for (int i = 0; i < k; ++i) {
+			intfns[i] = new ReciprocalHash(i,m);
+		}
 	}
-	else if(intfn == "squareroot"){	
-		for(int i = 0; i < k; i ++){
-			SquareRootHash* squareroothash = new SquareRootHash(i, m); 
-			intfns[i] = squareroothash; 
+	else if(intfn == "squareroot"){
+		for (int i = 0; i < k; ++i) {
+			intfns[i] = new SquareRootHash(i,m);
 		}
 	}
 
