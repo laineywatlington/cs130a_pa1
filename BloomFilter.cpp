@@ -10,10 +10,10 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	intfns = new IntegerHash*[k]; 
         bits = new uint64_t[m]; 
 	if(strfn == "jenkins"){
-		this->strfn = new JenkinsHash();
+		this -> strfn = new JenkinsHash();
 	}
 	else if(strfn == "pearson"){
-		this->strfn = new PearsonHash(); 
+		this -> strfn = new PearsonHash(); 
 	}
 	if(intfn == "division"){
 		for(int i = 0; i < k; i ++){
@@ -45,17 +45,20 @@ void BloomFilter::insert(const std::string& value){
 }
 
 bool BloomFilter::lookup(const std::string& value) const{
-	uint64_t newValue = strfn -> hash(value);
+	uint64_t newValue = strfn->hash(value);
+	int num = 0;
 	for(int i = 0; i < k; i++){
-		uint64_t location = intfns[i]-> hash(newValue);
-		int place = (location / 64);
-		int number = location % 64;
-		uint64_t temp = bits[place] >> number;
-		if((temp & uint64_t(1)) == 0){
-			return false;
+		uint64_t location = intfns[i] -> hash(newValue);
+		if(bits[location] != 0){
+			num++;
 		}
 	}
-	return true;
+	if(num == k){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 //destructor
