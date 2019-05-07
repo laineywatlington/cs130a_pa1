@@ -48,24 +48,24 @@ void HashSet::insert(const std::string& value){
 
 void HashSet::rehash(){
   int oldSlots = nslots;
-  nslots *= 2;  //set a new capacity for table
-  string ** temp = slots; //temporary table to hold info
-  //now, create a new table from slots !
-  slots = new string * [nslots];
-  nitems = 0;
-  //initialize everything to null so that we can hash into it 
-  for(int i = 0; i < nslots; i++){
-    slots[i] = NULL;
-  }
-  delete intfn;
-  intfn = new SquareRootHash(5, nslots);
-  for(int i = 0; i < oldSlots; i++){
-    if(temp[i] != 0){
-      insert(*temp[i]);
-      delete temp[i];
-    }
-  }
-  delete [] temp;
+	nslots *= 2; //set a new capacity for table
+	string** temp = slots; //create a temporary array to store info in 
+	slots = new string*[nslots]; //create new array double the size to hash into
+	nitems = 0; //make new table empty so we can hash into it
+	for (int i = 0; i < nslots; i++) {
+		slots[i] = NULL;
+	}
+  //CLEAN MEMORY
+	delete intfn;
+	intfn = new SquareRootHash(100, nslots);
+  //now, we insert elements from old, temp array into new one
+	for (int i = 0; i < oldSlots; i++) { 
+		if (temp[i] != 0) {
+			insert(*temp[i]); //insert item into table
+			delete temp[i];  //free up space in old array
+		}
+	}
+	delete [] temp; //get rid of temp array
 }
 
 HashSet::~HashSet(){
