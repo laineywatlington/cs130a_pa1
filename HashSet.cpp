@@ -1,5 +1,7 @@
 #include "HashSet.h"
-
+#include <string>
+#include <cstdint>
+#include <iostream>
 using namespace std;
 
 HashSet::HashSet(){
