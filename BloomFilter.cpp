@@ -8,7 +8,7 @@ BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
 	this->k = k; 
 	this->m = m;
 	intfns = new IntegerHash*[k]; 
-        bits = new uint64_t[m]; 
+        this -> bits = new uint64_t[m](); 
 	if(strfn == "jenkins"){
 		this -> strfn = new JenkinsHash();
 	}
