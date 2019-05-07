@@ -6,8 +6,8 @@ HashSet::HashSet(){
   //initialization
   nitems = 0;
   nslots = 100;
-  intfn = new SquareRootHash(5, nslots);
-  strfn = new JenkinsHash;
+  intfn = new DivisionHash(0, nslots);
+  strfn = new JenkinsHash();
   slots = new string * [nslots];
   //set every slot to null
   for(int i = 0; i < nslots; ++i){
