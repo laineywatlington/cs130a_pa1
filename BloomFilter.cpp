@@ -1,31 +1,40 @@
+#include "IntegerHashes.h"
+#include "StringHashes.h"
 #include "BloomFilter.h"
+#include <iostream>
+using namespace std; 
 
-//bloom filter constructor
 BloomFilter::BloomFilter(int k, int m, std::string strfn, std::string intfn){
-  this -> k = k;
-  this -> m = m;
-  this -> bits = new uint64_t[m];
-  //check which kind of hash it is and respon accordingly
-  if(strfn == "jenkins"){
-    this -> strfn = new JenkinsHash();
-  }
-  else if(strfn == "pearson"){
-    this -> strfn = new PearsonHash();
-  }
-  intfns = new IntegerHash*[k];
-  for(int i = 0; i < k; i++){
-    if(intfn == "division"){
-      this -> intfns[i] = new DivisionHash(i, m);
-    }
-    else if(intfn == "reciprocal"){
-      this -> intfns[i] = new ReciprocalHash(i, m);
-    }
-    else if(intfn == "squareroot"){
-      this -> intfns[i] = new SquareRootHash(i, m);
-    }
-  }
-}
+	this->k = k; 
+	this->m = m;
+	intfns = new IntegerHash*[k]; 
+        bits = new uint64_t[m]; 
+	if(strfn == "jenkins"){
+		this->strfn = new JenkinsHash();
+	}
+	else if(strfn == "pearson"){
+		this->strfn = new PearsonHash(); 
+	}
+	if(intfn == "division"){
+		for(int i = 0; i < k; i ++){
+			DivisionHash* divisionhash = new DivisionHash(i, m);  
+			intfns[i] = divisionhash; 
+		}
+	}
+	else if(intfn == "reciprocal"){
+		for(int i = 0; i < k; i ++){
+			ReciprocalHash* reciprocalhash = new ReciprocalHash(i, m); 
+			intfns[i] = reciprocalhash; 
+		} 
+	}
+	else if(infn == "squareroot"){	
+		for(int i = 0; i < k; i ++){
+			SquareRootHash* squareroothash = new SquareRootHash(i, m); 
+			intfns[i] = squareroothash; 
+		}
+	}
 
+}
 
 void BloomFilter::insert(const std::string& value){
 	for(int i = 0; i < k; i++){
@@ -46,7 +55,6 @@ bool BloomFilter::lookup(const std::string& value) const{
 	}
 	return true; 
 }
-
 
 //destructor
 BloomFilter::~BloomFilter(){
