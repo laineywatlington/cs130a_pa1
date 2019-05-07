@@ -6,11 +6,11 @@ using namespace std;
 
 HashSet::HashSet(){
   //initialization
-  nitems = 0;
-  nslots = 100;
-  intfn = new DivisionHash(0, nslots);
-  strfn = new JenkinsHash();
-  slots = new string * [nslots];
+  this -> nitems = 0;
+  this -> nslots = 100;
+  this -> intfn = new DivisionHash(0, nslots);
+  this -> strfn = new JenkinsHash();
+  this -> slots = new string * [nslots];
   //set every slot to null
   for(int i = 0; i < nslots; ++i){
     slots[i] = NULL;
