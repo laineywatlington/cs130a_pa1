@@ -17,17 +17,6 @@ HashSet::HashSet(){
   }
 }
 
-HashSet::~HashSet(){
-  //delete every value in slots
-  for(int i = 0; i < nslots; ++i){
-    delete slots[i];
-  }
-  //clean up
-  delete [] slots;
-  delete intfn;
-  delete strfn;
-}
-
 bool HashSet::lookup(const std::string& value) const{
   int i = 0;
   uint64_t location = strfn -> hash(value);
@@ -92,3 +81,15 @@ void HashSet::rehash(){
   }
   delete [] temp;
 }
+
+HashSet::~HashSet(){
+  //delete every value in slots
+  for(int i = 0; i < nslots; ++i){
+    delete slots[i];
+  }
+  //clean up
+  delete [] slots;
+  delete intfn;
+  delete strfn;
+}
+
