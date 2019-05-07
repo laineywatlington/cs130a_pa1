@@ -57,10 +57,10 @@ bool BloomFilter::lookup(const std::string& value) const{
 
 //destructor
 BloomFilter::~BloomFilter(){
-  for(int i = 0; i < k; i++){
-    delete intfns[i];
-  }
-  delete [] intfns;
-  delete strfn;
-  delete [] bits;
+	delete [] bits;
+	delete strfn;
+	for(int i = 0; i < k; i++){
+		delete intfns[i];
+	}
+	delete [] intfns
 }
