@@ -62,5 +62,5 @@ BloomFilter::~BloomFilter(){
 	for(int i = 0; i < k; i++){
 		delete intfns[i];
 	}
-	delete [] intfns
+	delete [] intfns;
 }
