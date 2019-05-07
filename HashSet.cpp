@@ -32,18 +32,21 @@ bool HashSet::lookup(const string& value) const{
 }
 
 void HashSet::insert(const std::string& value){
-    uint64_t location = strfn->hash(value);
-    uint64_t newValue = intfn->hash(location);
-    for (int i = 0; ; i++) {
-        if (slots[(newValue + i) % nslots] == NULL) {
-            slots[(newValue + i) % nslots] = new string(value);
-            nitems++;
-            break;
-        }
-    }
-    if (2 * nitems >= nslots) {
-        rehash();
-    }
+	//first check things
+	//is value already in table? if so, return
+	if(lookup(value)){
+		return;
+	}
+	nitems ++;
+	if(nitems >= nslots){
+		rehash();
+	}
+	uint64_t newValue = strfn -> hash(value);
+	uint64_t location = intfn -> hash(newValue);
+	while(slots[location]){
+		location = (location + 1) % nslots;
+	}
+	slots[location] = new string(value);
 }
 
 void HashSet::rehash(){
